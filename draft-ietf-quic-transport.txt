@@ -7701,10 +7701,12 @@ Table of Contents
    first unallocated codepoint in the selected space.  Requests for
    multiple codepoints MAY use a contiguous range.  This minimizes the
    risk that differing semantics are attributed to the same codepoint by
-   different implementations.  Use of the first codepoint in a range is
-   intended for use by specifications that are developed through the
-   standards process [STD] and its allocation MUST be negotiated with
-   IANA before use.
+   different implementations.
+
+   Use of the first available codepoint in a range is reserved for
+   allocation using the Standards Action policy; see Section 4.9 of
+   [RFC8126].  The early codepoint assignment process [EARLY-ASSIGN] can
+   be used for these values.
 
    For codepoints that are encoded in variable-length integers
    (Section 16), such as frame types, codepoints that encode to four or
@@ -7713,8 +7715,8 @@ Table of Contents
 
    Applications to register codepoints in QUIC registries MAY include a
    codepoint as part of the registration.  IANA MUST allocate the
-   selected codepoint unless that codepoint is already assigned or the
-   codepoint is the first unallocated codepoint in the registry.
+   selected codepoint if the codepoint is unassigned and the
+   requirements of the registration policy are met.
 
 22.1.3.  Reclaiming Provisional Codepoints
 
@@ -7959,6 +7961,11 @@ Table of Contents
               Datagram Transports", RFC 8899, DOI 10.17487/RFC8899,
               September 2020, <https://www.rfc-editor.org/info/rfc8899>.
 
+   [EARLY-ASSIGN]
+              Cotton, M., "Early IANA Allocation of Standards Track Code
+              Points", BCP 100, RFC 7120, DOI 10.17487/RFC7120, January
+              2014, <https://www.rfc-editor.org/info/rfc7120>.
+
    [IPv4]     Postel, J., "Internet Protocol", STD 5, RFC 791,
               DOI 10.17487/RFC0791, September 1981,
               <https://www.rfc-editor.org/info/rfc791>.
@@ -8163,10 +8170,6 @@ Table of Contents
               RSnake Hansen, R., "Welcome to Slowloris...", June 2009,
               <https://web.archive.org/web/20150315054838/
               http://ha.ckers.org/slowloris/>.
-
-   [STD]      Bradner, S., "The Internet Standards Process -- Revision
-              3", BCP 9, RFC 2026, DOI 10.17487/RFC2026, October 1996,
-              <https://www.rfc-editor.org/info/rfc2026>.
 
 Appendix A.  Pseudocode
 
