@@ -5,8 +5,8 @@
 QUIC                                                     J. Iyengar, Ed.
 Internet-Draft                                                    Fastly
 Intended status: Standards Track                         M. Thomson, Ed.
-Expires: 24 May 2021                                             Mozilla
-                                                        20 November 2020
+Expires: 25 May 2021                                             Mozilla
+                                                        21 November 2020
 
 
            QUIC: A UDP-Based Multiplexed and Secure Transport
@@ -48,7 +48,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 May 2021.
+   This Internet-Draft will expire on 25 May 2021.
 
 Copyright Notice
 
@@ -3443,8 +3443,9 @@ Table of Contents
    stateless reset size.
 
    Endpoints MUST discard packets that are too small to be valid QUIC
-   packets.  With the set of AEAD functions defined in [QUIC-TLS],
-   packets that are smaller than 21 bytes are never valid.
+   packets.  To give an example, with the set of AEAD functions defined
+   in [QUIC-TLS], short header packets that are smaller than 21 bytes
+   are never valid.
 
    Endpoints MUST send stateless reset packets formatted as a packet
    with a short header.  However, endpoints MUST treat any packet ending
@@ -7973,12 +7974,12 @@ Table of Contents
    [QUIC-RECOVERY]
               Iyengar, J., Ed. and I. Swett, Ed., "QUIC Loss Detection
               and Congestion Control", Work in Progress, Internet-Draft,
-              draft-ietf-quic-recovery, 20 November 2020,
+              draft-ietf-quic-recovery, 21 November 2020,
               <https://tools.ietf.org/html/draft-ietf-quic-recovery>.
 
    [QUIC-TLS] Thomson, M., Ed. and S. Turner, Ed., "Using Transport
               Layer Security (TLS) to Secure QUIC", Work in Progress,
-              Internet-Draft, draft-ietf-quic-tls, 20 November 2020,
+              Internet-Draft, draft-ietf-quic-tls, 21 November 2020,
               <https://tools.ietf.org/html/draft-ietf-quic-tls>.
 
    [RFC1191]  Mogul, J. and S. Deering, "Path MTU discovery", RFC 1191,
@@ -8094,7 +8095,7 @@ Table of Contents
    [QUIC-INVARIANTS]
               Thomson, M., "Version-Independent Properties of QUIC",
               Work in Progress, Internet-Draft, draft-ietf-quic-
-              invariants, 20 November 2020,
+              invariants, 21 November 2020,
               <https://tools.ietf.org/html/draft-ietf-quic-invariants>.
 
    [QUIC-MANAGEABILITY]
