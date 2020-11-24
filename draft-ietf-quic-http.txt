@@ -4,8 +4,8 @@
 
 QUIC                                                      M. Bishop, Ed.
 Internet-Draft                                                    Akamai
-Intended status: Standards Track                        21 November 2020
-Expires: 25 May 2021
+Intended status: Standards Track                        24 November 2020
+Expires: 28 May 2021
 
 
              Hypertext Transfer Protocol Version 3 (HTTP/3)
@@ -45,7 +45,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 25 May 2021.
+   This Internet-Draft will expire on 28 May 2021.
 
 Copyright Notice
 
@@ -2234,7 +2234,9 @@ Table of Contents
    New registries created in this document operate under the QUIC
    registration policy documented in Section 22.1 of [QUIC-TRANSPORT].
    These registries all include the common set of fields listed in
-   Section 22.1.1 of [QUIC-TRANSPORT].
+   Section 22.1.1 of [QUIC-TRANSPORT].  These registries [SHALL be/are]
+   collected under a "Hypertext Transfer Protocol version 3 (HTTP/3)
+   Parameters" heading.
 
    The initial allocations in these registries created in this document
    are all assigned permanent status and list a change controller of the
@@ -2514,13 +2516,13 @@ Table of Contents
 
    [QPACK]    Krasic, C., Bishop, M., and A. Frindell, Ed., "QPACK:
               Header Compression for HTTP over QUIC", Work in Progress,
-              Internet-Draft, draft-ietf-quic-qpack, 21 November 2020,
+              Internet-Draft, draft-ietf-quic-qpack, 24 November 2020,
               <https://tools.ietf.org/html/draft-ietf-quic-qpack>.
 
    [QUIC-TRANSPORT]
               Iyengar, J., Ed. and M. Thomson, Ed., "QUIC: A UDP-Based
               Multiplexed and Secure Transport", Work in Progress,
-              Internet-Draft, draft-ietf-quic-transport, 21 November
+              Internet-Draft, draft-ietf-quic-transport, 24 November
               2020,
               <https://tools.ietf.org/html/draft-ietf-quic-transport>.
 
