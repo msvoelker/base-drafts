@@ -570,7 +570,7 @@ Table of Contents
    [SEMANTICS].
 
    Receipt of an invalid sequence of frames MUST be treated as a
-   connection error of type H3_FRAME_UNEXPECTED (Section 8).  In
+   connection error of type H3_FRAME_UNEXPECTED; see Section 8.  In
    particular, a DATA frame before any HEADERS frame, or a HEADERS or
    DATA frame after the trailing HEADERS frame is considered invalid.
    Other frame types, especially unknown frame types, might be permitted
@@ -581,7 +581,8 @@ Table of Contents
    These PUSH_PROMISE frames are not part of the response; see
    Section 4.4 for more details.  PUSH_PROMISE frames are not permitted
    on push streams; a pushed response that includes PUSH_PROMISE frames
-   MUST be treated as a connection error of type H3_FRAME_UNEXPECTED.
+   MUST be treated as a connection error of type H3_FRAME_UNEXPECTED;
+   see Section 8.
 
    Frames of unknown types (Section 9), including reserved frames
    (Section 7.2.8) MAY be sent on a request or push stream before,
@@ -614,7 +615,7 @@ Table of Contents
    message has been received to make progress.  If a client-initiated
    stream terminates without enough of the HTTP message to provide a
    complete response, the server SHOULD abort its response with the
-   error code H3_REQUEST_INCOMPLETE.
+   error code H3_REQUEST_INCOMPLETE; see Section 8.
 
    A server can send a complete response prior to the client sending an
    entire request if the response does not depend on any portion of the
@@ -928,7 +929,7 @@ Table of Contents
    to be sent on the stream.  Extension frames MAY be used if
    specifically permitted by the definition of the extension.  Receipt
    of any other known frame type MUST be treated as a connection error
-   of type H3_FRAME_UNEXPECTED.
+   of type H3_FRAME_UNEXPECTED; see Section 8.
 
    The TCP connection can be closed by either peer.  When the client
    ends the request stream (that is, the receive stream at the proxy
@@ -943,7 +944,7 @@ Table of Contents
    A TCP connection error is signaled by abruptly terminating the
    stream.  A proxy treats any error in the TCP connection, which
    includes receiving a TCP segment with the RST bit set, as a stream
-   error of type H3_CONNECT_ERROR (Section 8.1).  Correspondingly, if a
+   error of type H3_CONNECT_ERROR; see Section 8.  Correspondingly, if a
    proxy detects an error with the stream or the QUIC connection, it
    MUST close the TCP connection.  If the underlying TCP implementation
    permits it, the proxy SHOULD send a TCP segment with the RST bit set.
@@ -972,9 +973,9 @@ Table of Contents
    client sends MAX_PUSH_ID frames to control the number of pushes that
    a server can promise.  A server SHOULD use Push IDs sequentially,
    beginning from zero.  A client MUST treat receipt of a push stream as
-   a connection error of type H3_ID_ERROR when no MAX_PUSH_ID frame has
-   been sent or when the stream references a Push ID that is greater
-   than the maximum Push ID.
+   a connection error of type H3_ID_ERROR (Section 8) when no
+   MAX_PUSH_ID frame has been sent or when the stream references a Push
+   ID that is greater than the maximum Push ID.
 
    The Push ID is used in one or more PUSH_PROMISE frames
    (Section 7.2.5) that carry the header section of the request message.
@@ -1142,7 +1143,8 @@ Table of Contents
    than the identifier in any previous frame, since clients might
    already have retried unprocessed requests on another HTTP connection.
    Receiving a GOAWAY containing a larger identifier than previously
-   received MUST be treated as a connection error of type H3_ID_ERROR.
+   received MUST be treated as a connection error of type H3_ID_ERROR;
+   see Section 8.
 
    An endpoint that is attempting to gracefully shut down a connection
    can send a GOAWAY frame with a value set to the maximum possible
@@ -1240,8 +1242,8 @@ Table of Contents
    HTTP/3 does not use server-initiated bidirectional streams, though an
    extension could define a use for these streams.  Clients MUST treat
    receipt of a server-initiated bidirectional stream as a connection
-   error of type H3_STREAM_CREATION_ERROR unless such an extension has
-   been negotiated.
+   error of type H3_STREAM_CREATION_ERROR (Section 8) unless such an
+   extension has been negotiated.
 
 6.2.  Unidirectional Streams
 
@@ -1319,7 +1321,8 @@ Table of Contents
    sender MUST NOT close the control stream, and the receiver MUST NOT
    request that the sender close the control stream.  If either control
    stream is closed at any point, this MUST be treated as a connection
-   error of type H3_CLOSED_CRITICAL_STREAM.
+   error of type H3_CLOSED_CRITICAL_STREAM.  Connection errors are
+   described in Section 8.
 
    A pair of unidirectional streams is used rather than a single
    bidirectional stream.  This allows either peer to send data as soon
@@ -1343,7 +1346,7 @@ Table of Contents
 
    Only servers can push; if a server receives a client-initiated push
    stream, this MUST be treated as a connection error of type
-   H3_STREAM_CREATION_ERROR.
+   H3_STREAM_CREATION_ERROR; see Section 8.
 
    Push Stream Header {
      Stream Type (i) = 0x01,
@@ -1355,7 +1358,7 @@ Table of Contents
    Each Push ID MUST only be used once in a push stream header.  If a
    push stream header includes a Push ID that was used in another push
    stream header, the client MUST treat this as a connection error of
-   type H3_ID_ERROR.
+   type H3_ID_ERROR; see Section 8.
 
 6.2.3.  Reserved Stream Types
 
@@ -1445,12 +1448,12 @@ Table of Contents
    its description.  A frame payload that contains additional bytes
    after the identified fields or a frame payload that terminates before
    the end of the identified fields MUST be treated as a connection
-   error (Section 8) of type H3_FRAME_ERROR.
+   error of type H3_FRAME_ERROR; see Section 8.
 
    When a stream terminates cleanly, if the last frame on the stream was
-   truncated, this MUST be treated as a connection error (Section 8) of
-   type H3_FRAME_ERROR.  Streams that terminate abruptly may be reset at
-   any point in a frame.
+   truncated, this MUST be treated as a connection error of type
+   H3_FRAME_ERROR; see Section 8.  Streams that terminate abruptly may
+   be reset at any point in a frame.
 
 7.2.  Frame Definitions
 
@@ -1461,8 +1464,8 @@ Table of Contents
 
    DATA frames MUST be associated with an HTTP request or response.  If
    a DATA frame is received on a control stream, the recipient MUST
-   respond with a connection error (Section 8) of type
-   H3_FRAME_UNEXPECTED.
+   respond with a connection error of type H3_FRAME_UNEXPECTED; see
+   Section 8.
 
    DATA Frame {
      Type (i) = 0x0,
@@ -1739,12 +1742,12 @@ Table of Contents
    promise.
 
    If a PUSH_PROMISE frame is received on the control stream, the client
-   MUST respond with a connection error (Section 8) of type
-   H3_FRAME_UNEXPECTED.
+   MUST respond with a connection error of type H3_FRAME_UNEXPECTED; see
+   Section 8.
 
    A client MUST NOT send a PUSH_PROMISE frame.  A server MUST treat the
    receipt of a PUSH_PROMISE frame as a connection error of type
-   H3_FRAME_UNEXPECTED.
+   H3_FRAME_UNEXPECTED; see Section 8.
 
    See Section 4.4 for a description of the overall server push
    mechanism.
@@ -1777,8 +1780,8 @@ Table of Contents
 
    The GOAWAY frame applies to the entire connection, not a specific
    stream.  A client MUST treat a GOAWAY frame on a stream other than
-   the control stream as a connection error (Section 8) of type
-   H3_FRAME_UNEXPECTED.
+   the control stream as a connection error of type H3_FRAME_UNEXPECTED;
+   see Section 8.
 
    See Section 5.2 for more information on the use of the GOAWAY frame.
 
@@ -1839,26 +1842,40 @@ Table of Contents
 
 8.  Error Handling
 
-   QUIC allows the application to abruptly terminate (reset) individual
-   streams or the entire connection; see Sections 2.4 and 5.3 of
-   [QUIC-TRANSPORT].  These are referred to as "stream errors" or
-   "connection errors" (see Section 11 of [QUIC-TRANSPORT]) and have
-   associated error codes, but do not necessarily indicate a problem
-   with the connection or either implementation.  For example, a stream
-   can be reset if the requested resource is no longer needed.
+   When a stream cannot be completed successfully, QUIC allows the
+   application to abruptly terminate (reset) that stream and communicate
+   a reason; see Section 2.4 of [QUIC-TRANSPORT].  This is referred to
+   as a "stream error."  An HTTP/3 implementation can decide to close a
+   QUIC stream and communicate the type of error.  Wire encodings of
+   error codes are defined in Section 8.1.  Stream errors are distinct
+   from HTTP status codes which indicate error conditions.  Stream
+   errors indicate that the sender did not transfer or consume the full
+   request or response, while HTTP status codes indicate the result of a
+   request that was successfully received.
+
+   If an entire connection needs to be terminated, QUIC similarly
+   provides mechanisms to communicate a reason; see Section 5.3 of
+   [QUIC-TRANSPORT].  This is referred to as a "connection error."
+   Similar to stream errors, an HTTP/3 implementation can terminate a
+   QUIC connection and communicate the reason using an error code from
+   Section 8.1.
+
+   Although the reasons for closing streams and connections are called
+   "errors," these actions do not necessarily indicate a problem with
+   the connection or either implementation.  For example, a stream can
+   be reset if the requested resource is no longer needed.
 
    An endpoint MAY choose to treat a stream error as a connection error
-   under certain circumstances.  Implementations need to consider the
-   impact on outstanding requests before making this choice.
+   under certain circumstances, closing the entire connection in
+   response to a condition on a single stream.  Implementations need to
+   consider the impact on outstanding requests before making this
+   choice.
 
    Because new error codes can be defined without negotiation (see
    Section 9), use of an error code in an unexpected context or receipt
    of an unknown error code MUST be treated as equivalent to
    H3_NO_ERROR.  However, closing a stream can have other effects
    regardless of the error code; for example, see Section 4.1.
-
-   This section describes HTTP/3-specific error codes that can be used
-   to express the cause of a connection or stream error.
 
 8.1.  HTTP/3 Error Codes
 
@@ -2061,8 +2078,8 @@ Table of Contents
    An endpoint that does not monitor this behavior exposes itself to a
    risk of denial-of-service attack.  Implementations SHOULD track the
    use of these features and set limits on their use.  An endpoint MAY
-   treat activity that is suspicious as a connection error (Section 8)
-   of type H3_EXCESSIVE_LOAD, but false positives will result in
+   treat activity that is suspicious as a connection error of type
+   H3_EXCESSIVE_LOAD (Section 8), but false positives will result in
    disrupting valid connections and requests.
 
 10.5.1.  Limits on Field Section Size
