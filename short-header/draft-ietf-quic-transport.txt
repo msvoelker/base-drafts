@@ -5462,9 +5462,7 @@ Table of Contents
 17.3.  Short Header Packets
 
    Short headers are used for packets that are sent after the version
-   and 1-RTT keys are negotiated.  This version of QUIC uses a short
-   packet header for only 1-RTT packets.  Additionally, 1-RTT packets in
-   this version of QUIC can only use a short packet header.
+   and 1-RTT keys are negotiated.
 
    Short Header Packet {
      Header Form (1) = 0,
@@ -5479,6 +5477,10 @@ Table of Contents
    }
 
                    Figure 19: Short Header Packet Format
+
+   This version of QUIC uses a short packet header for only 1-RTT
+   packets.  Additionally, 1-RTT packets in this version of QUIC can
+   only use a short packet header
 
    Packets that use the short header contain the following fields:
 
