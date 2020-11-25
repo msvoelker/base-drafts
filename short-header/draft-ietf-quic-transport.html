@@ -5185,7 +5185,7 @@ do not include a packet number.<a href="#section-12.3-3" class="pilcrow">¶</a><
 space.<a href="#section-12.3-5.2" class="pilcrow">¶</a>
 </li>
           <li class="normal" id="section-12.3-5.3">Application data space: All 0-RTT (<a href="#packet-0rtt" class="xref">Section 17.2.3</a>) and 1-RTT
-(<a href="#short-header" class="xref">Section 17.3</a>) encrypted packets are in this space.<a href="#section-12.3-5.3" class="pilcrow">¶</a>
+(<a href="#packet-1rtt" class="xref">Section 17.3.1</a>) encrypted packets are in this space.<a href="#section-12.3-5.3" class="pilcrow">¶</a>
 </li>
         </ul>
 <p id="section-12.3-6">As described in <span>[<a href="#QUIC-TLS" class="xref">QUIC-TLS</a>]</span>, each packet type uses different protection keys.<a href="#section-12.3-6" class="pilcrow">¶</a></p>
@@ -5489,7 +5489,7 @@ type could appear in, indicated by the following characters:<a href="#section-12
           <dd class="break"></dd>
 <dt id="section-12.4-11.7">1:</dt>
           <dd style="margin-left: 1.5em" id="section-12.4-11.8">
-  1-RTT (<a href="#short-header" class="xref">Section 17.3</a>)<a href="#section-12.4-11.8" class="pilcrow">¶</a>
+  1-RTT (<a href="#packet-1rtt" class="xref">Section 17.3.1</a>)<a href="#section-12.4-11.8" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
 <dt id="section-12.4-11.9">ih:</dt>
@@ -7087,13 +7087,13 @@ in <a href="#cid-auth" class="xref">Section 7.3</a>.<a href="#section-17.2.5.3-5
         </h3>
 <p id="section-17.3-1">This version of QUIC defines a single packet type that uses the short packet
 header.<a href="#section-17.3-1" class="pilcrow">¶</a></p>
-<div id="packet-1-rtt">
+<div id="packet-1rtt">
 <section id="section-17.3.1">
           <h4 id="name-1-rtt-packet">
 <a href="#section-17.3.1" class="section-number selfRef">17.3.1. </a><a href="#name-1-rtt-packet" class="section-name selfRef">1-RTT Packet</a>
           </h4>
-<p id="section-17.3.1-1">A 1-RTT packet uses a short packet header.  It is used after the version
-and 1-RTT keys are negotiated.<a href="#section-17.3.1-1" class="pilcrow">¶</a></p>
+<p id="section-17.3.1-1">A 1-RTT packet uses a short packet header. It is used after the version and
+1-RTT keys are negotiated.<a href="#section-17.3.1-1" class="pilcrow">¶</a></p>
 <span id="name-1-rtt-packet-2"></span><figure id="figure-19">
             <div class="artwork art-text alignLeft" id="section-17.3.1-2.1">
 <pre>
@@ -7194,8 +7194,8 @@ versions of QUIC are interpreted.<a href="#section-17.3.1-5" class="pilcrow">¶<
         <h3 id="name-latency-spin-bit">
 <a href="#section-17.4" class="section-number selfRef">17.4. </a><a href="#name-latency-spin-bit" class="section-name selfRef">Latency Spin Bit</a>
         </h3>
-<p id="section-17.4-1">The latency spin bit, defined for 1-RTT packets (<a href="#packet-1-rtt" class="xref">Section 17.3.1</a>), enables
-passive latency monitoring from observation points on the network path
+<p id="section-17.4-1">The latency spin bit, which is defined for 1-RTT packets (<a href="#packet-1rtt" class="xref">Section 17.3.1</a>),
+enables passive latency monitoring from observation points on the network path
 throughout the duration of a connection. The server reflects the spin value
 received, while the client 'spins' it after one RTT. On-path observers can
 measure the time between two spin bit toggle events to estimate the end-to-end
@@ -7220,8 +7220,8 @@ MUST ignore any incoming value. It is RECOMMENDED that endpoints set the spin
 bit to a random value either chosen independently for each packet or chosen
 independently for each connection ID.<a href="#section-17.4-5" class="pilcrow">¶</a></p>
 <p id="section-17.4-6">If the spin bit is enabled for the connection, the endpoint maintains a spin
-value for each network path and sets the spin bit in 1-RTT packets to the
-currently stored value when a 1-RTT packet is sent on that path.  The spin value
+value for each network path and sets the spin bit in the packet header to the
+currently stored value when a 1-RTT packet is sent on that path. The spin value
 is initialized to 0 in the endpoint for each network path. Each endpoint also
 remembers the highest packet number seen from its peer on each path.<a href="#section-17.4-6" class="pilcrow">¶</a></p>
 <p id="section-17.4-7">When a server receives a 1-RTT packet that increases the highest packet number

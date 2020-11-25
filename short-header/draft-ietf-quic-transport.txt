@@ -3815,7 +3815,7 @@ Table of Contents
       this space.
 
    *  Application data space: All 0-RTT (Section 17.2.3) and 1-RTT
-      (Section 17.3) encrypted packets are in this space.
+      (Section 17.3.1) encrypted packets are in this space.
 
    As described in [QUIC-TLS], each packet type uses different
    protection keys.
@@ -3958,7 +3958,7 @@ Table of Contents
 
    0:  0-RTT (Section 17.2.3)
 
-   1:  1-RTT (Section 17.3)
+   1:  1-RTT (Section 17.3.1)
 
    ih:  Only a CONNECTION_CLOSE frame of type 0x1c can appear in Initial
       or Handshake packets.
@@ -5540,12 +5540,13 @@ Table of Contents
 
 17.4.  Latency Spin Bit
 
-   The latency spin bit, defined for 1-RTT packets (Section 17.3.1),
-   enables passive latency monitoring from observation points on the
-   network path throughout the duration of a connection.  The server
-   reflects the spin value received, while the client 'spins' it after
-   one RTT.  On-path observers can measure the time between two spin bit
-   toggle events to estimate the end-to-end RTT of a connection.
+   The latency spin bit, which is defined for 1-RTT packets
+   (Section 17.3.1), enables passive latency monitoring from observation
+   points on the network path throughout the duration of a connection.
+   The server reflects the spin value received, while the client 'spins'
+   it after one RTT.  On-path observers can measure the time between two
+   spin bit toggle events to estimate the end-to-end RTT of a
+   connection.
 
    The spin bit is only present in 1-RTT packets, since it is possible
    to measure the initial RTT of a connection by observing the
@@ -5575,11 +5576,11 @@ Table of Contents
    connection ID.
 
    If the spin bit is enabled for the connection, the endpoint maintains
-   a spin value for each network path and sets the spin bit in 1-RTT
-   packets to the currently stored value when a 1-RTT packet is sent on
-   that path.  The spin value is initialized to 0 in the endpoint for
-   each network path.  Each endpoint also remembers the highest packet
-   number seen from its peer on each path.
+   a spin value for each network path and sets the spin bit in the
+   packet header to the currently stored value when a 1-RTT packet is
+   sent on that path.  The spin value is initialized to 0 in the
+   endpoint for each network path.  Each endpoint also remembers the
+   highest packet number seen from its peer on each path.
 
    When a server receives a 1-RTT packet that increases the highest
    packet number seen by the server from the client on a given network
