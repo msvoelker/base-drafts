@@ -5,8 +5,8 @@
 QUIC                                                     J. Iyengar, Ed.
 Internet-Draft                                                    Fastly
 Intended status: Standards Track                         M. Thomson, Ed.
-Expires: 30 May 2021                                             Mozilla
-                                                        26 November 2020
+Expires: 4 June 2021                                             Mozilla
+                                                         1 December 2020
 
 
            QUIC: A UDP-Based Multiplexed and Secure Transport
@@ -48,7 +48,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 30 May 2021.
+   This Internet-Draft will expire on 4 June 2021.
 
 Copyright Notice
 
@@ -6185,7 +6185,8 @@ Table of Contents
 
    Token:  An opaque blob that the client can use with a future Initial
       packet.  The token MUST NOT be empty.  A client MUST treat receipt
-      of a NEW_TOKEN frame with
+      of a NEW_TOKEN frame with an empty Token field as a connection
+      error of type FRAME_ENCODING_ERROR.
 
    A client might receive multiple NEW_TOKEN frames that contain the
    same token value if packets containing the frame are incorrectly
@@ -7978,12 +7979,12 @@ Table of Contents
    [QUIC-RECOVERY]
               Iyengar, J., Ed. and I. Swett, Ed., "QUIC Loss Detection
               and Congestion Control", Work in Progress, Internet-Draft,
-              draft-ietf-quic-recovery, 26 November 2020,
+              draft-ietf-quic-recovery, 1 December 2020,
               <https://tools.ietf.org/html/draft-ietf-quic-recovery>.
 
    [QUIC-TLS] Thomson, M., Ed. and S. Turner, Ed., "Using Transport
               Layer Security (TLS) to Secure QUIC", Work in Progress,
-              Internet-Draft, draft-ietf-quic-tls, 26 November 2020,
+              Internet-Draft, draft-ietf-quic-tls, 1 December 2020,
               <https://tools.ietf.org/html/draft-ietf-quic-tls>.
 
    [RFC1191]  Mogul, J. and S. Deering, "Path MTU discovery", RFC 1191,
@@ -8099,7 +8100,7 @@ Table of Contents
    [QUIC-INVARIANTS]
               Thomson, M., "Version-Independent Properties of QUIC",
               Work in Progress, Internet-Draft, draft-ietf-quic-
-              invariants, 26 November 2020,
+              invariants, 1 December 2020,
               <https://tools.ietf.org/html/draft-ietf-quic-invariants>.
 
    [QUIC-MANAGEABILITY]
