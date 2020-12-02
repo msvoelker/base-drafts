@@ -5,10 +5,10 @@
 QUIC                                                           C. Krasic
 Internet-Draft                                                   Netflix
 Intended status: Standards Track                               M. Bishop
-Expires: 4 June 2021                                 Akamai Technologies
+Expires: 5 June 2021                                 Akamai Technologies
                                                         A. Frindell, Ed.
                                                                 Facebook
-                                                         1 December 2020
+                                                         2 December 2020
 
 
                   QPACK: Header Compression for HTTP/3
@@ -47,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 June 2021.
+   This Internet-Draft will expire on 5 June 2021.
 
 Copyright Notice
 
@@ -112,12 +112,12 @@ Table of Contents
    6.  Error Handling
    7.  Security Considerations
      7.1.  Probing Dynamic Table State
-     7.2.  Applicability to QPACK and HTTP
-     7.3.  Mitigation
-     7.4.  Never-Indexed Literals
-     7.5.  Static Huffman Encoding
-     7.6.  Memory Consumption
-     7.7.  Implementation Limits
+       7.1.1.  Applicability to QPACK and HTTP
+       7.1.2.  Mitigation
+       7.1.3.  Never-Indexed Literals
+     7.2.  Static Huffman Encoding
+     7.3.  Memory Consumption
+     7.4.  Implementation Limits
    8.  IANA Considerations
      8.1.  Settings Registration
      8.2.  Stream Type Registration
@@ -1275,7 +1275,7 @@ Table of Contents
    at a time, reducing an exponential-time attack into a linear-time
    attack.
 
-7.2.  Applicability to QPACK and HTTP
+7.1.1.  Applicability to QPACK and HTTP
 
    QPACK mitigates but does not completely prevent attacks modeled on
    CRIME ([CRIME]) by forcing a guess to match an entire field line,
@@ -1307,7 +1307,7 @@ Table of Contents
    connection by different web origins ([RFC6454]) are made by mutually
    distrustful entities.
 
-7.3.  Mitigation
+7.1.2.  Mitigation
 
    Users of HTTP that require confidentiality for header or trailer
    fields can use values with entropy sufficient to make guessing
@@ -1349,7 +1349,7 @@ Table of Contents
    field name might occur for shorter values more quickly or with higher
    probability than for longer values.
 
-7.4.  Never-Indexed Literals
+7.1.3.  Never-Indexed Literals
 
    Implementations can also choose to protect sensitive fields by not
    compressing them and instead encoding their value as literals.
@@ -1386,7 +1386,7 @@ Table of Contents
    Note that these criteria for deciding to use a never-indexed literal
    representation will evolve over time as new attacks are discovered.
 
-7.5.  Static Huffman Encoding
+7.2.  Static Huffman Encoding
 
    There is no currently known attack against a static Huffman encoding.
    A study has shown that using a static Huffman encoding table created
@@ -1394,7 +1394,7 @@ Table of Contents
    attacker could not take advantage of this information leakage to
    recover any meaningful amount of information (see [PETAL]).
 
-7.6.  Memory Consumption
+7.3.  Memory Consumption
 
    An attacker can try to cause an endpoint to exhaust its memory.
    QPACK is designed to limit both the peak and stable amounts of memory
@@ -1454,7 +1454,7 @@ Table of Contents
    new streams, reading only from the encoder stream, or closing the
    connection.
 
-7.7.  Implementation Limits
+7.4.  Implementation Limits
 
    An implementation of QPACK needs to ensure that large values for
    integers, long encoding for integers, or long string literals do not
@@ -1530,13 +1530,13 @@ Table of Contents
 
    [HTTP3]    Bishop, M., Ed., "Hypertext Transfer Protocol Version 3
               (HTTP/3)", Work in Progress, Internet-Draft, draft-ietf-
-              quic-http, 1 December 2020,
+              quic-http, 2 December 2020,
               <https://tools.ietf.org/html/draft-ietf-quic-http>.
 
    [QUIC-TRANSPORT]
               Iyengar, J., Ed. and M. Thomson, Ed., "QUIC: A UDP-Based
               Multiplexed and Secure Transport", Work in Progress,
-              Internet-Draft, draft-ietf-quic-transport, 1 December
+              Internet-Draft, draft-ietf-quic-transport, 2 December
               2020,
               <https://tools.ietf.org/html/draft-ietf-quic-transport>.
 
