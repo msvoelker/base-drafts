@@ -1088,8 +1088,8 @@ Table of Contents
 
 7.6.  Persistent Congestion
 
-   When a sender establishes loss of all in-flight packets sent over a
-   long enough duration, the network is considered to be experiencing
+   When a sender establishes loss of all ack-eliciting packets sent over
+   a long enough duration, the network is considered to be experiencing
    persistent congestion.
 
 7.6.1.  Duration
